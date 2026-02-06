@@ -1,4 +1,4 @@
-<?php $title = "Tony's Git"; ?>
+<?php $title = "Tony's Git, btw."; ?>
 <?php require APP_ROOT . '/app/views/partials/header.php'; ?>
 
 <h1>Repositories</h1>
