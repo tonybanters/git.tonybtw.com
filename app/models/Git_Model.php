@@ -156,7 +156,7 @@ class Git_Model {
 
     public static function get_readme(string $repo, string $ref = 'HEAD'): ?array {
         $tree = self::get_tree($repo, $ref);
-        $readme_names = ['README.md', 'README', 'README.txt', 'readme.md'];
+        $readme_names = ['README.md', 'README', 'README.txt', 'readme.md', 'README.org', 'readme.org'];
 
         foreach ($tree as $entry) {
             if ($entry['type'] === 'blob' && in_array($entry['name'], $readme_names)) {
