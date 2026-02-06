@@ -1,3 +1,24 @@
+@font-face {
+    font-family: 'IosevkaNerdFontMono';
+    src: url('/fonts/IosevkaNerdFontMono-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'IosevkaNerdFontMono';
+    src: url('/fonts/IosevkaNerdFontMono-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'IosevkaNerdFontMono';
+    src: url('/fonts/IosevkaNerdFontMono-Italic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+}
+
 :root {
     --bg: #0d1117;
     --bg-secondary: #161b22;
@@ -24,7 +45,7 @@ html {
 }
 
 body {
-    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    font-family: 'IosevkaNerdFontMono', ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
     background: var(--bg);
     color: var(--fg);
     line-height: 1.5;
@@ -44,7 +65,7 @@ a:hover {
 header {
     background: var(--bg-secondary);
     border-bottom: 1px solid var(--border);
-    padding: 1rem 2rem;
+    padding: 1rem 0.5rem;
 }
 
 header nav {
@@ -58,9 +79,9 @@ header .logo {
 }
 
 main {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 1rem 0.5rem;
 }
 
 footer {
@@ -88,7 +109,7 @@ table {
 
 th, td {
     text-align: left;
-    padding: 0.5rem 1rem;
+    padding: 0.25rem 0.5rem;
     border-bottom: 1px solid var(--border);
 }
 
@@ -190,8 +211,9 @@ code {
 
 .commits .date {
     color: var(--fg-subtle);
-    width: 120px;
+    width: 150px;
     text-align: right;
+    white-space: nowrap;
 }
 
 .summary-section {

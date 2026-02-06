@@ -9,8 +9,6 @@
 </head>
 <body>
 <header>
-    <nav>
-        <a href="/" class="logo">git.tonybtw.com</a>
-    </nav>
+    <a href="/" class="logo">git.tonybtw.com</a>
 </header>
 <main>
