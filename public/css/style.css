@@ -65,7 +65,7 @@ a:hover {
 header {
     background: var(--bg-secondary);
     border-bottom: 1px solid var(--border);
-    padding: 1rem 0.5rem;
+    padding: 1rem 2rem;
 }
 
 header nav {
@@ -105,6 +105,25 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin: 1rem 0;
+}
+
+table.repo-list {
+    table-layout: fixed;
+}
+
+table.repo-list th:nth-child(1),
+table.repo-list td:nth-child(1) {
+    width: 20%;
+}
+
+table.repo-list th:nth-child(2),
+table.repo-list td:nth-child(2) {
+    width: 55%;
+}
+
+table.repo-list th:nth-child(3),
+table.repo-list td:nth-child(3) {
+    width: 25%;
 }
 
 th, td {
