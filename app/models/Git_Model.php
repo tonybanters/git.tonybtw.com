@@ -1,31 +1,57 @@
 <?php
 
+enum RepoCategory: string {
+    case Core = 'Core projects';
+    case Dotfiles = 'Dotfiles';
+    case Suckless = 'Suckless';
+    case Sites = 'Sites';
+    case Other = 'Other';
+
+    public static function for(string $repo): self {
+        return match($repo) {
+            'oxwm', 'tonarchy' => self::Core,
+            'nvim', 'tmux-btw', 'bashrc', 'alacritty', 'nixos-dotfiles', 'debian-btw' => self::Dotfiles,
+            'dwm', 'st' => self::Suckless,
+            'tonybtw.com', 'git.tonybtw.com', 'shop.tonybtw.com', 'guandan.dev' => self::Sites,
+            default => self::Other,
+        };
+    }
+}
+
 class Git_Model {
     private static function repo_root(): string {
         return $_SERVER['GIT_ROOT'] ?? getenv('GIT_ROOT') ?: '/srv/git';
     }
 
     public static function list_repos(): array {
-        $repos = [];
+        $grouped = [];
+        foreach (RepoCategory::cases() as $cat) {
+            $grouped[$cat->value] = [];
+        }
 
         foreach (glob(self::repo_root() . '/*.git', GLOB_ONLYDIR) as $path) {
             $name = basename($path);
+            $shortName = basename($name, '.git');
             $desc = @file_get_contents("$path/description") ?: '';
             if (str_contains($desc, 'Unnamed repository')) {
                 $desc = '';
             }
 
             $last_commit = self::run($name, 'log -1 --format=%ct') ?: '0';
+            $category = RepoCategory::for($shortName)->value;
 
-            $repos[] = [
+            $grouped[$category][] = [
                 'name' => $name,
                 'description' => trim($desc),
                 'last_commit' => (int)$last_commit,
             ];
         }
 
-        usort($repos, fn($a, $b) => $b['last_commit'] <=> $a['last_commit']);
-        return $repos;
+        foreach ($grouped as &$repos) {
+            usort($repos, fn($a, $b) => $b['last_commit'] <=> $a['last_commit']);
+        }
+
+        return $grouped;
     }
 
     public static function get_repo_info(string $repo): ?array {

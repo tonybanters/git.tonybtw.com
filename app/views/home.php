@@ -3,6 +3,9 @@
 
 <h1>Repositories</h1>
 
+<?php foreach ($repos as $category => $categoryRepos): ?>
+<?php if (empty($categoryRepos)) continue; ?>
+<h2><?= htmlspecialchars($category) ?></h2>
 <table class="repo-list">
     <thead>
         <tr>
@@ -12,7 +15,7 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($repos as $r): ?>
+        <?php foreach ($categoryRepos as $r): ?>
         <tr>
             <td><a href="/<?= htmlspecialchars($r['name']) ?>"><?= htmlspecialchars(basename($r['name'], '.git')) ?></a></td>
             <td><?= htmlspecialchars($r['description']) ?></td>
@@ -21,5 +24,6 @@
         <?php endforeach; ?>
     </tbody>
 </table>
+<?php endforeach; ?>
 
 <?php require APP_ROOT . '/app/views/partials/footer.php'; ?>
